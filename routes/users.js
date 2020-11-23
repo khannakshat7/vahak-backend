@@ -83,7 +83,26 @@ router.post('/login',(req, res, next) => {
     })(req, res, next);
   });
 
+  router.post('/upload_report',authenticate.verifyUser,(req,res)=>{
+    User.upload(req,res,async (err)=>{
+      if(err)
+      {
+          console.log('multer error');
+          return res.json({error:`an error occured ${err}`});
+      }
+      let userid=req.user._id;
+      let path=User.Path+req.file.filename;
+      let user=await User.findById(userid);
+      await user.reports.push({name:req.body.name,path});
+      await user.save();
+      return res.status(200).json({"message":"Report Uploaded succesfully"});
+    })
+  })
 
+  router.get('/get_patients',authenticate.verifyUser,async (req,res)=>{
+    const Patients=await User.find({parentid:req.user._id});
+    return res.status(200).json({Patients});
+  })
 router.get('/detail',authenticate.verifyUser, (req,res,next) => {
   res.setHeader('Content-Type','application/json');
   res.statusCode = 200;
@@ -94,9 +113,16 @@ router.get('/detail',authenticate.verifyUser, (req,res,next) => {
     typeofdatabase: req.user.typeofdatabase,
     userpic: req.user.userpic,
     companylogo: req.user.companylogo,
-    parentid: req.user.parentid
+    parentid: req.user.parentid,
+    reports:req.user.reports
   });
 });
+
+router.get('/user_info/:id',authenticate.verifyUser,async (req,res)=>{
+   console.log("here-------"+req.params.id);
+   let user=await User.findById(req.params.id);
+  return res.status(200).json(user);
+})
 
 router.post('/localuser/signup',authenticate.verifyUser, (req,res,next) => {
   User.register({

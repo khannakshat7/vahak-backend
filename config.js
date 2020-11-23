@@ -4,5 +4,5 @@ module.exports = {
     'mongoUrl': 'mongodb://nitesh_nit:nitesh@cluster0-shard-00-00-iifjy.azure.mongodb.net:27017,cluster0-shard-00-01-iifjy.azure.mongodb.net:27017,cluster0-shard-00-02-iifjy.azure.mongodb.net:27017/testnit?replicaSet=Cluster0-shard-0&ssl=true&authSource=admin'
 }
 
-
+//
 //main mongo url:mongodb://nitesh_nit:nitesh@cluster0-shard-00-00-iifjy.azure.mongodb.net:27017,cluster0-shard-00-01-iifjy.azure.mongodb.net:27017,cluster0-shard-00-02-iifjy.azure.mongodb.net:27017/testnit?replicaSet=Cluster0-shard-0&ssl=true&authSource=admin
