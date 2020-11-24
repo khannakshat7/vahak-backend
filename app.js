@@ -29,6 +29,7 @@ var sensorRouter = require('./routes/sensorRouter');
 var sensorinstRouter = require('./routes/sensorinstRouter');
 var codeRouter = require('./routes/codeRouter');
 var prescriptionRouter = require('./routes/prescriptionRouter');
+var appointmentRouter = require('./routes/appointmentRouter');
 
 // creating connection to the database mongo server and schemas.
 const mongoose = require('mongoose');
@@ -83,6 +84,7 @@ app.use('/sensor',sensorRouter);
 app.use('/sensorinst',sensorinstRouter);
 app.use('/code',codeRouter);
 app.use('/prescription',prescriptionRouter);
+app.use('/make_appointment',appointmentRouter);
 //changes
 app.use('/custommap',require('./routes/custommapRouter'));
 
